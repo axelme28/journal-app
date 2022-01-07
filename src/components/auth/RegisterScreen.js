@@ -1,10 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 export const RegisterScreen = () => {
+    const { handleInputChange, values } = useForm({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const { name, email, password, confirmPassword } = values;
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        console.log(name, email, password, confirmPassword);
+    };
+
     return (
         <>
-            <form>
+            <form onSubmit={handleRegister}>
                 <h3
                     className="auth__title"
                     style={{ display: "flex", justifyContent: "center" }}
@@ -17,6 +32,8 @@ export const RegisterScreen = () => {
                     name="name"
                     className="auth__input"
                     placeholder="Name"
+                    value={name}
+                    onChange={handleInputChange}
                 />
 
                 <input
@@ -25,6 +42,8 @@ export const RegisterScreen = () => {
                     placeholder="Email"
                     className="auth__input"
                     autoComplete="off"
+                    value={email}
+                    onChange={handleInputChange}
                 />
 
                 <input
@@ -32,6 +51,9 @@ export const RegisterScreen = () => {
                     name="password"
                     placeholder="Password"
                     className="auth__input"
+                    autoComplete="off"
+                    value={password}
+                    onChange={handleInputChange}
                 />
 
                 <input
@@ -39,6 +61,9 @@ export const RegisterScreen = () => {
                     name="confirmPassword"
                     placeholder="Confirm Password"
                     className="auth__input"
+                    autoComplete="off"
+                    value={confirmPassword}
+                    onChange={handleInputChange}
                 />
 
                 <button

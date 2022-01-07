@@ -1,10 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 export const LogInScreen = () => {
+    const { handleInputChange, values } = useForm({
+        email: "axelin@gmail.com",
+        password: "1234",
+    });
+
+    const { email, password } = values;
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <>
-            <form>
+            <form onSubmit={handleLogin}>
                 <h3
                     className="auth__title"
                     style={{ display: "flex", justifyContent: "center" }}
@@ -18,6 +30,8 @@ export const LogInScreen = () => {
                     placeholder="Email"
                     className="auth__input"
                     autoComplete="off"
+                    value={email}
+                    onChange={handleInputChange}
                 />
 
                 <input
@@ -25,6 +39,9 @@ export const LogInScreen = () => {
                     name="password"
                     placeholder="Password"
                     className="auth__input"
+                    autoComplete="off"
+                    value={password}
+                    onChange={handleInputChange}
                 />
 
                 <button type="submit" className="btn btn-primary btn-block">
